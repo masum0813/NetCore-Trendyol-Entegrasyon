@@ -21,7 +21,6 @@ namespace NetCore_Trendyol_Entegrasyon.Controllers.Product
         /// <summary>
         /// Get BrandListFrom Trendyol
         /// </summary>
-        /// <returns></returns>
         /// <remarks>
         /// Sample request:
         ///
