@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NetCore-Trendyol-Entegrasyon</name>
+    </assembly>
+    <members>
+        <member name="M:NetCore_Trendyol_Entegrasyon.Controllers.Product.BrandsController.GetBrands">
+             <summary>
+             Get BrandListFrom Trendyol
+             </summary>
+             <returns></returns>
+             <remarks>
+             Sample request:
+            
+                 GET /Brands
+            
+             </remarks>
+             <returns>List of Brands</returns>
+        </member>
+    </members>
+</doc>

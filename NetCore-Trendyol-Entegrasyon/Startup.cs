@@ -13,6 +13,9 @@ using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.OpenApi.Models;
 
+using System.IO;
+using System.Reflection;
+
 namespace NetCore_Trendyol_Entegrasyon
 {
     public class Startup
@@ -50,37 +53,46 @@ namespace NetCore_Trendyol_Entegrasyon
                         Name = "Use under LICX",
                         // Url = new Uri("https://example.com/license"),
                     }
-                });
+
+
             });
+            // Set the comments path for the Swagger JSON and UI.
+            var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+            c.IncludeXmlComments(xmlPath);
+
+        });
+
+
 
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI(c =>
         {
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", ".NetCore Trendyol Entegrasyon");
-            });
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", ".NetCore Trendyol Entegrasyon");
+        });
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
-
-
+        if (env.IsDevelopment())
+        {
+            app.UseDeveloperExceptionPage();
         }
+
+        app.UseHttpsRedirection();
+
+        app.UseRouting();
+
+        app.UseAuthorization();
+
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllers();
+        });
+
+
     }
+}
 }

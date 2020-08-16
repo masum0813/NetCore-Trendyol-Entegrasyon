@@ -392,7 +392,7 @@
           "Microsoft.EntityFrameworkCore.Relational": "3.1.7"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Design.dll": {}
+          "lib/netstandard2.0/_._": {}
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Design.dll": {}
