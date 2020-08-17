@@ -1,0 +1,6 @@
+types:
+  fix:
+    ui: 'My UI Fix Label'
+    api: 'API Fixed!'
+    default: 'There was no scope attached'
+  feat: 'I cover all features'
