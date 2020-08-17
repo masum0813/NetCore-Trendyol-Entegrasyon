@@ -16,6 +16,8 @@ using Microsoft.OpenApi.Models;
 using System.IO;
 using System.Reflection;
 
+using NetCore_Trendyol_Entegrasyon.Models.Api;
+
 namespace NetCore_Trendyol_Entegrasyon
 {
     public class Startup
@@ -30,6 +32,9 @@ namespace NetCore_Trendyol_Entegrasyon
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            //services.Configure<ApiModel>(options => Configuration.GetSection("ApiInfo").Bind(options));
+            services.Configure<ApiModel>(Configuration.GetSection("ApiModel"));
 
             services.AddControllers();
 
@@ -55,44 +60,45 @@ namespace NetCore_Trendyol_Entegrasyon
                     }
 
 
+                });
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+
             });
-            // Set the comments path for the Swagger JSON and UI.
-            var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-            c.IncludeXmlComments(xmlPath);
 
-        });
 
 
 
         }
 
-    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-    {
-        app.UseSwagger();
-        app.UseSwaggerUI(c =>
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            c.SwaggerEndpoint("/swagger/v1/swagger.json", ".NetCore Trendyol Entegrasyon");
-        });
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", ".NetCore Trendyol Entegrasyon");
+            });
 
-        if (env.IsDevelopment())
-        {
-            app.UseDeveloperExceptionPage();
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+            app.UseHttpsRedirection();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+
+
         }
-
-        app.UseHttpsRedirection();
-
-        app.UseRouting();
-
-        app.UseAuthorization();
-
-        app.UseEndpoints(endpoints =>
-        {
-            endpoints.MapControllers();
-        });
-
-
     }
-}
 }
