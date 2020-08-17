@@ -37,27 +37,16 @@ namespace NetCore_Trendyol_Entegrasyon.Controllers.Product
         public async Task<List<BrandsModel>> GetBrands()
         {
             var brandList = new List<BrandsModel>();
-            using (var client = new HttpClient())
+            try
             {
-                try
-                {
-                    client.BaseAddress = new Uri(_apiModel.ProdRootUrl);
-                    client.DefaultRequestHeaders.Accept.Clear();
-                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    var response = await client.GetAsync("brands");
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var content = await response.Content.ReadAsStringAsync();
-                        brandList = JsonSerializer.Deserialize<BrandsList>(content).brands;
-                    }
+                var content = await GetResponse();
+                brandList = JsonSerializer.Deserialize<BrandsList>(content).brands;
 
-                }
-                catch (System.Exception)
-                {
+            }
+            catch (System.Exception)
+            {
 
-                    throw;
-                }
-
+                throw;
             }
 
             return brandList;
@@ -79,23 +68,43 @@ namespace NetCore_Trendyol_Entegrasyon.Controllers.Product
         public async Task<List<BrandsModel>> GetBrandsWithName(string brandName)
         {
             var brandList = new List<BrandsModel>();
+
+            var content = await GetResponse(brandName);
+            brandList = JsonSerializer.Deserialize<List<BrandsModel>>(content);
+
+            return brandList;
+        }
+
+
+
+        private async Task<string> GetResponse(string brandName = "")
+        {
+            var retVal = "";
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(_apiModel.ProdRootUrl);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                var response = await client.GetAsync(string.Format("brands/by-name?name={0}",brandName));
-                if (response.IsSuccessStatusCode)
+
+                var requestUrl = "brands";
+                if (!string.IsNullOrEmpty(brandName))
                 {
-                    var content = await response.Content.ReadAsStringAsync();
-                    brandList = JsonSerializer.Deserialize<List<BrandsModel>>(content);
+                    requestUrl = string.Format("brands/by-name?name={0}", brandName);
                 }
 
+                var response = await client.GetAsync(requestUrl);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    retVal = await response.Content.ReadAsStringAsync();
+
+                }
             }
 
-            return brandList;
-        }
+            return retVal;
 
+
+        }
 
     }
 
