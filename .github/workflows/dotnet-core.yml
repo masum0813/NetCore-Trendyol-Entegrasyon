@@ -18,8 +18,8 @@ jobs:
       with:
         dotnet-version: 3.1.301
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore NetCore-Trendyol-Entegrasyon/NetCore-Trendyol-Entegrasyon.csproj
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build NetCore-Trendyol-Entegrasyon/NetCore-Trendyol-Entegrasyon.csproj --configuration Release --no-restore
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test NetCore-Trendyol-Entegrasyon/NetCore-Trendyol-Entegrasyon.csproj --no-restore --verbosity normal
