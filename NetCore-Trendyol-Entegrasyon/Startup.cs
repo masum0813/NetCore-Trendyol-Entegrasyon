@@ -80,12 +80,14 @@ namespace NetCore_Trendyol_Entegrasyon
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", ".NetCore Trendyol Entegrasyon");
+                c.RoutePrefix = string.Empty;
             });
 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
 
             app.UseHttpsRedirection();
 
