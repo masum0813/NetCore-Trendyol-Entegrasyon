@@ -1,0 +1,45 @@
+{
+    "items": [
+        {
+            "barcode": "3060",
+            "title": "SİYAH ŞORT",
+            "productMainId": "3060MI",
+            "brandId": 977125,
+            "categoryId": 530,
+            "quantity": 2,
+            "stockCode": "3060SS",
+            "dimensionalWeight": 3,
+            "description": "YÜKSEK BEL PİLELİ SİYAH ŞORT",
+            "currencyType": "TRY",
+            "listPrice": 125.00,
+            "salePrice": 98.90,
+            "vatRate": 8,
+            "cargoCompanyId": 3,
+            "shipmentAddressId": 0,
+            "returningAddressId": 0,
+            "images": [
+                {
+                    "url": "https://marketplace-supplier-media-center.oss-eu-central-1.aliyuncs.com/prod/182928/144c8328-c2ec-45a6-91ec-17b08db86d63/siyahsort1.jpg"
+                }
+            ],
+            "attributes": [
+                {
+                    "attributeId": 338,
+                    "attributeValueId": 8351
+                },
+                {
+                    "attributeId": 1,
+                    "attributeValueId": 2
+                },
+                {
+                    "attributeId": 250,
+                    "attributeValueId": 2433
+                },
+                {
+                    "attributeId": 343,
+                    "attributeValueId": 4295
+                }
+            ]
+        }
+    ]
+}

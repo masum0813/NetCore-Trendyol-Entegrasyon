@@ -261,3 +261,7 @@ paket-files/
 __pycache__/
 *.pyc
 .vscode/launch.json
+
+**/appsettings.*.json
+**/.DS_Store
+.env
